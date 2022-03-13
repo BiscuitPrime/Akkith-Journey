@@ -38,9 +38,11 @@ public class Loot {
      * The method called when a loot is obtained.
      * @param player the player that obtains the loot
      * @param lootObtained the obtained loot
+     * @throws InterruptedException
      */
-    public void obtainLoot(final Player player, final Loot lootObtained)
+    public void obtainLoot(final Player player, final Loot lootObtained) throws InterruptedException
     {
+        Thread.sleep(500);
         System.out.println("You obtain the "+lootObtained.getName());
         player.addToInventory(lootObtained);
     }

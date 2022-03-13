@@ -2,6 +2,7 @@ package Player;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import Loot.Loot;
 import Loot.LootType;
@@ -49,10 +50,10 @@ public class Player {
     private Map<String,Loot> inventory;
     /**
      * Returns a collection of the player's inventory
-     * @return player inventory
+     * @return player inventory (keySet)
      */
-    public Map<String,Loot> getInventory(){
-        return this.inventory;
+    public Set<String> getInventory(){
+        return this.inventory.keySet();
     }
     /**
      * Adds an item to the player's inventory.
