@@ -14,11 +14,30 @@ public class Loot {
     //type of the loop
     private LootType type;
     public LootType getType(){return this.type;}
+    //description of the loot
+    private String description;
+    public String getDescription(){return this.description;}
 
-    //constructor of the loot
-    public Loot(final int id, final String name, final LootType type){
+    /**
+     * Constructor of the loot item
+     * @param id id of the loot
+     * @param name name of the loot
+     * @param type type of the loot
+     * @param description description of said loot
+     */
+    public Loot(final int id, final String name, final LootType type, final String description){
         this.id=id;
         this.name=name;
         this.type=type;
+        this.description=description;
+    }
+
+    /**
+     * The method called when a loot is obtained.
+     * @param lootObtained the obtained loot
+     */
+    public void obtainLoot(final Loot lootObtained)
+    {
+        System.out.println("You obtain the "+lootObtained.getName());
     }
 }

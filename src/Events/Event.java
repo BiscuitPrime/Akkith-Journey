@@ -3,7 +3,7 @@ package Events;
 import Loot.Loot;
 
 /**
- * The interface used by events.
+ * The class used by events.
  * @author Henri 'Biscuit Prime' Nomico
  */
 public class Event

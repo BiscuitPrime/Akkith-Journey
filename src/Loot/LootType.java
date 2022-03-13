@@ -1,5 +1,13 @@
 package Loot;
 
+/**
+ * The enumeration for the different loots.
+ * Types :
+ * - WEAPON
+ * - EQUIPMENT
+ * - BUFF_ITEM
+ * @author Henri 'Biscuit Prime' Nomico
+ */
 public enum LootType{
     /**
      * Loot types :
