@@ -1,5 +1,7 @@
 package Loot;
 
+import Player.Player;
+
 /**
  * Class used by the loot items.
  * @author Henri 'Biscuit Prime' Nomico
@@ -34,10 +36,12 @@ public class Loot {
 
     /**
      * The method called when a loot is obtained.
+     * @param player the player that obtains the loot
      * @param lootObtained the obtained loot
      */
-    public void obtainLoot(final Loot lootObtained)
+    public void obtainLoot(final Player player, final Loot lootObtained)
     {
         System.out.println("You obtain the "+lootObtained.getName());
+        player.addToInventory(lootObtained);
     }
 }

@@ -31,8 +31,13 @@ public class Game {
     public static void main(String[] args) {
         createEventChain(5);
         Player player = new Player("Akkith", 56);
+        Loot lootOne = new Loot(2,"Sword test",LootType.WEAPON,"a sword");
+        System.out.println(player.getInventory());
+        player.addToInventory(lootOne);
+        System.out.println(player.getInventory());
         ChestEvent chestOne = new ChestEvent(1, "Sarcophagus of Heilith", new Loot(1, "Sword of Bil Akath", LootType.WEAPON, "The mighty sword of the last Archon under Akkalioth's orders. Under its blade, numerous angels have fallen, as the Fangs of Entropy closed upon the lucent city of Dek Ithien. It was lost during the siege of Ol Imoliv, when the archon was slain by Hildrimen, Rage Incarnate."));
-        chestOne.launchEvent();
+        chestOne.launchEvent(player);
+        System.out.println(player.getInventory());
     }
 
     /**
