@@ -78,7 +78,7 @@ public class Game {
         while(chainIterator.hasNext()) 
         {
             getEventList().get(chainIterator.next()).launchEvent(player, scanner);
-            waitForPlayerEnterInput();
+            waitForPlayerEnterInput(player);
         }
         scanner.close();//we close the scanner at the end of the game.
     }
@@ -86,16 +86,19 @@ public class Game {
     /**
      * The function that waits for a player input to switch events
      */
-    public static void waitForPlayerEnterInput()
+    public static void waitForPlayerEnterInput(final Player player)
     {
-        Console c = System.console();
-        if (c != null) 
+        System.out.println("\nPress any key to continue or type E to display player stats.");
+        String readLine = scanner.nextLine();
+        if(readLine.contains("E"))
         {
-            c.format("\nPress ENTER to proceed.\n");
-            while(c.readLine()==null)
-            {
-                c.format("\nPress ENTER to proceed.\n");
-            }
+            System.out.println("\nPlayer stats :");
+            System.out.println("Name : "+player.getName());
+            System.out.println("Hp : " + player.getHp());
+            System.out.println(player.getName()+" inventory :");
+            System.out.println(player.getInventory());
+            waitForPlayerEnterInput(player);
         }
+        System.out.println("\n");
     }
 }

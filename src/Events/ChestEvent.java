@@ -32,12 +32,12 @@ public class ChestEvent extends Event {
         Thread.sleep(500);
         System.out.println(this.getDescription());
         Thread.sleep(500);
-        System.out.println("Do you wish to open the chest ? Type YES if you want to open it or NO if you want to leave.\n");
+        System.out.println("\nDo you wish to open the chest ? Type YES if you want to open it or NO if you want to leave.");
         //we test wether or not the player wants to open the chest :
         if(waitForPlayerOpenInput(scanner)=="YES")
         {
             Thread.sleep(500);
-            System.out.println("You open the " + this.getName());
+            System.out.println("\nYou open the " + this.getName());
             Thread.sleep(500);
             System.out.println("Inside, amongst relics of old past, you find the "+this.getReward().getName());
             Thread.sleep(500);
@@ -45,7 +45,7 @@ public class ChestEvent extends Event {
             switch(this.getReward().getType())
             {
                 case WEAPON :
-                    System.out.println("You carfully take the weapon, as dust and specks of dirt crumble over it.");
+                    System.out.println("You carefully take the weapon, as dust and specks of dirt crumble over it.");
                     break;
                 case EQUIPMENT :
                     System.out.println("You take the equipment, as it cracks in your fingers.");
@@ -61,7 +61,7 @@ public class ChestEvent extends Event {
         } 
         else if(waitForPlayerOpenInput(scanner)=="NO") //if the player doesn't open the chest :
         {
-            System.out.println("You decide not to open the chest.");
+            System.out.println("\nYou decide not to open the chest.");
         }
         endEvent(player, scanner); //the end event function is called directly, for chest events, by the launch event as no other interruptions are in the way
     }
@@ -91,7 +91,7 @@ public class ChestEvent extends Event {
             }
             else
             {
-                System.out.println("Type YES or NO to proceed.\n");
+                System.out.println("Type YES or NO to proceed.");
                 waitForPlayerOpenInput(scanner);
             }
             return "ERROR";
@@ -99,8 +99,7 @@ public class ChestEvent extends Event {
         catch (Exception e) 
         {
             //TODO: handle exception
-            return "An error occured";
+            return "An error occured during the WaitForPlayerOpenInput of the ChestEvent class";
         }
-        
     }
 }
