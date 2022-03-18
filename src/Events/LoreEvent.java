@@ -2,7 +2,7 @@ package Events;
 
 import java.util.Scanner;
 
-import Loot.Loot;
+import Loot.Item;
 import Player.Player;
 
 /**
@@ -17,7 +17,7 @@ public class LoreEvent extends Event {
      * @param name : name of the event
      * @param loot : MUST BE NULL FOR A LORE EVENT (avoid waste of time)
      */
-    public LoreEvent(final int id, final String name, final Loot loot, final String description){
+    public LoreEvent(final int id, final String name, final Item loot, final String description){
         super(id,name,null, description);
     }
 

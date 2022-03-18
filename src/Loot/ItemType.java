@@ -8,7 +8,7 @@ package Loot;
  * - BUFF_ITEM
  * @author Henri 'Biscuit Prime' Nomico
  */
-public enum LootType{
+public enum ItemType{
     /**
      * Loot types :
      * - Weapon : a weapon used by the player (only one weapon can be used at once)
@@ -21,7 +21,7 @@ public enum LootType{
     private String type;
 
     //constructor of the lootType
-    private LootType(final String type){
+    private ItemType(final String type){
         this.type=type;
     }
 }

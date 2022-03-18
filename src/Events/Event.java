@@ -2,7 +2,7 @@ package Events;
 
 import java.util.Scanner;
 
-import Loot.Loot;
+import Loot.Item;
 import Player.Player;
 
 /**
@@ -22,12 +22,12 @@ public class Event
      */
     public String getName(){return this.name;}
     //reward of the event
-    private Loot reward;
+    private Item reward;
     /**
      * Returns the reward of the event.
      * @return the reward
      */
-    public Loot getReward(){return this.reward;}
+    public Item getReward(){return this.reward;}
     //description of the event
     private String eventDescription;
     /**
@@ -43,7 +43,7 @@ public class Event
      * @param loot : loot that is rewarded by the event
      * @param description : description of said event
      */
-    public Event(final int id, final String name, final Loot loot, final String description){
+    public Event(final int id, final String name, final Item loot, final String description){
         this.id=id;
         this.name=name;
         this.reward=loot;

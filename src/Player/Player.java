@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import Loot.Loot;
-import Loot.LootType;
+import Loot.Item;
+import Loot.ItemType;
 
 /**
  * The Player Class
@@ -47,7 +47,7 @@ public class Player {
     /**
      * Inventory of the player, containing all obtained items.
      */
-    private Map<String,Loot> inventory;
+    private Map<String,Item> inventory;
     /**
      * Returns a collection of the player's inventory
      * @return player inventory (keySet)
@@ -59,7 +59,7 @@ public class Player {
      * Adds an item to the player's inventory.
      * @param item : the added item
      */
-    public void addToInventory(final Loot item){
+    public void addToInventory(final Item item){
         this.inventory.put(item.getName(),item);
     }
 
@@ -72,6 +72,22 @@ public class Player {
         this.name=name;
         this.hp=hp;
         this.inventory=new HashMap<>();
-        this.addToInventory(new Loot(1,"Coin of Passage",LootType.EQUIPMENT,"A golden token forged in the pits of Uda Keiviv, symbol of the soldiers amongst the Golden Armies of Light."));
+        this.addToInventory(new Item(1,"Coin of Passage",ItemType.EQUIPMENT,"A golden token forged in the pits of Uda Keiviv, symbol of the soldiers amongst the Golden Armies of Light."));
+    }
+
+    public void calculateStats()
+    {
+        calculateATK();
+        calculateArmor();
+    }
+
+    public void calculateArmor()
+    {
+
+    }
+
+    public void calculateATK()
+    {
+
     }
 }

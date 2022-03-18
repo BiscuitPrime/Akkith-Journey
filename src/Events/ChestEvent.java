@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 import javax.lang.model.util.ElementScanner14;
 
-import Loot.Loot;
-import Loot.LootType;
+import Loot.Item;
+import Loot.ItemType;
 import Player.Player;
 
 /**
@@ -18,7 +18,7 @@ public class ChestEvent extends Event {
     /**
      * constructor of the ChestEvent.
      */
-    public ChestEvent(final int id, final String name, final Loot loot, final String description){
+    public ChestEvent(final int id, final String name, final Item loot, final String description){
         super(id,name,loot, description);
     }
 

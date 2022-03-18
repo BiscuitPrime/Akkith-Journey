@@ -6,9 +6,11 @@ import java.util.Scanner;
 
 import Events.ChestEvent;
 import Events.Event;
+import Events.FightEvent;
 import Events.LoreEvent;
-import Loot.Loot;
-import Loot.LootType;
+import Loot.Item;
+import Loot.ItemType;
+import Monsters.Monster;
 import Player.Player;
 
 /**
@@ -46,9 +48,22 @@ public class Game {
     {
         scanner = new Scanner(System.in);
         Player player = new Player("Akkith", 56);
+
+        /**
+         * Test phases
+         */
+        Monster monsterOne = new Monster(1,"Aoi","The monster",new Item(1, "Weapon", ItemType.WEAPON, "description"), "startDialogue", "endDialogue", "death");
+        FightEvent fightOne = new FightEvent(2, "Fight at world's end", new Item(3, "Sword from monster", ItemType.EQUIPMENT, "An helmet"), "The monster stand before you", monsterOne);
+        fightOne.launchEvent(player, scanner);
+        System.out.println(player.getInventory());
+
+        /**
+         * the actual game
+         */
+        /*
         createEventChain(2);
         launchChain(player, scanner); //the launch of the game is done when all events have been selected
-        System.out.println(player.getInventory());
+        */
     }
 
     /**
@@ -59,7 +74,7 @@ public class Game {
     {
         listEvents = new HashMap<>(); //we create the event chain
         LoreEvent startingEvent = new LoreEvent(1, "Ruins of Oba Kilien Mok", null, "You look at the desolation that was once a glorious city. The pale fumes are the only remains amongst the charred corpses and the blackened buildings that have all but crumbled to dust. Once a glorious city, you remember. You also remember its fall, as you defended the inhabitants from the Armies of Entropy. You must have been struck, as you find your armor wrent and sword broken. Finding no souls, you decide to go for the closest city that might still stand : Ak Variv.");
-        ChestEvent chestOne = new ChestEvent(2, "Sarcophagus of Heilith", new Loot(1, "Sword of Bil Akath", LootType.WEAPON, "The mighty sword of the last Archon under Akkalioth's orders. Under its blade, numerous angels have fallen, as the Fangs of Entropy closed upon the lucent city of Dek Ithien. It was lost during the siege of Ol Imoliv, when the archon was slain by Hildrimen, Rage Incarnate."), "The serene golden and purple hide fades around the edges of the box. An arm's length it measures, yet some strange force emanates from this boxy monument of time past.");
+        ChestEvent chestOne = new ChestEvent(2, "Sarcophagus of Heilith", new Item(1, "Sword of Bil Akath", ItemType.WEAPON, "The mighty sword of the last Archon under Akkalioth's orders. Under its blade, numerous angels have fallen, as the Fangs of Entropy closed upon the lucent city of Dek Ithien. It was lost during the siege of Ol Imoliv, when the archon was slain by Hildrimen, Rage Incarnate."), "The serene golden and purple hide fades around the edges of the box. An arm's length it measures, yet some strange force emanates from this boxy monument of time past.");
         addToEventList(startingEvent);
         addToEventList(chestOne);
     }
