@@ -18,7 +18,11 @@ public class Monster {
      * gets the name of the monster.
      * @return monster's name
      */
-    public String getName(){return this.getName();}
+    public String getName(){return this.name;}
+
+    //hp of the associated monster
+    private float monsterHp;
+    public float getHp(){return this.monsterHp;}
 
     //Description of the monster, told at the beginning of the encounter
     private String description;
