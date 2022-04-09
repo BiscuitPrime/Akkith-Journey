@@ -55,7 +55,7 @@ public class FightEvent extends Event {
         {
             Thread.sleep(500);
             System.out.println("You chose to fight this foe.");
-            fight(player, this.getMonster()); //we launch the method that will handle the fight
+            fightSetUp(player, this.getMonster()); //we launch the method that will handle the fight setup
         }
         else
         {
@@ -107,9 +107,90 @@ public class FightEvent extends Event {
         }
     }
 
-    private void fight(Player player, Monster monster)
+    /**
+     * Method that sets up the fight by calculating the various stats
+     * @param player
+     * @param monster
+     * @throws InterruptedException
+     */
+    private void fightSetUp(Player player, Monster monster) throws InterruptedException
     {
         //we start by calculating the damage and resistance of player :
+        System.out.println("Your current stats :");
+        Thread.sleep(500);
         player.calculateStats();
+        //now that the stats have been calculated, we launch the fight sequence :
+        fightSequence(player, monster);
+    }
+
+    /**
+     * The main fight sequence
+     * @param player
+     * @param monster
+     * @throws InterruptedException
+     */
+    private void fightSequence(Player player, Monster monster) throws InterruptedException
+    {
+        System.out.println("The air cools around you. The fight begins.\n");
+        Thread.sleep(500);
+        playerAttack(player,monster);
+        if(monster.getHp()<=0) //we check here if the player has killed in one shot the monster
+        {
+            System.out.println(monster.getDeathDialogue());
+            Thread.sleep(500);
+            this.getReward().obtainLoot(player,this.getReward());
+            return;
+        }
+        monsterAttack(player,monster);
+        checkFightState(player,monster);
+    }
+
+    /**
+     * The method that handles the player attacking
+     * @throws InterruptedException
+     */
+    private void playerAttack(Player player, Monster monster) throws InterruptedException
+    {
+        System.out.print("You attack the monster.\n");
+        Thread.sleep(500);
+        monster.setHp(monster.getHp()-player.getPlayerATK());
+        System.out.println("You deal "+player.getPlayerATK()+" damages to "+monster.getName()+".\n");
+    }
+
+    /**
+     * The method that handles the monster attacking
+     * @throws InterruptedException
+     */
+    private void monsterAttack(Player player, Monster monster) throws InterruptedException
+    {
+        System.out.print("The monster attacks you.\n");
+        Thread.sleep(500);
+        player.setHp(player.getHp()-monster.getATK());
+        System.out.println("The monster dealt "+monster.getATK()+" damage to you.\n");
+    }
+
+    /**
+     * The method that checks wether the player or the monster has died
+     * @throws InterruptedException
+     */
+    private void checkFightState(Player player,Monster monster) throws InterruptedException
+    {
+        //we start by checking the monster :
+        if(monster.getHp()<=0)
+        {
+            System.out.println(monster.getDeathDialogue());
+            Thread.sleep(500);
+            this.getReward().obtainLoot(player,this.getReward());
+            return;
+        }
+        //we then check the player :
+        if(player.getHp()<=0)
+        {
+            System.out.println(player.getDeathDialogue());
+            return;
+        }
+        //if we reached this point, both the monster and player are alive and well
+        System.out.println("Both you and "+monster.getName()+" stand tall as the dust settles.\n");
+        fightSequence(player, monster); //so we start the sequence again
     }
 }

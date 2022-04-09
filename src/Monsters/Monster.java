@@ -23,6 +23,7 @@ public class Monster {
     //hp of the associated monster
     private float monsterHp;
     public float getHp(){return this.monsterHp;}
+    public void setHp(float hp){this.monsterHp=hp;}
 
     //Description of the monster, told at the beginning of the encounter
     private String description;
@@ -48,7 +49,7 @@ public class Monster {
     private String deathDialogue;
     public String getDeathDialogue(){return this.deathDialogue;}
 
-    public Monster(int id, String name, String description, Item weapon, final String startDialogue, final String endDialogue, final String deathDialogue)
+    public Monster(int id, String name, String description, Item weapon, final int hp,final String startDialogue, final String endDialogue, final String deathDialogue)
     {
         if(weapon.getType()!=ItemType.WEAPON)
         {
@@ -61,5 +62,15 @@ public class Monster {
         this.startingDialogue=startDialogue;
         this.endDialogue=endDialogue;
         this.deathDialogue=deathDialogue;
+        this.monsterHp=hp;
+    }
+
+    /**
+     * Returns the ATK value of a monster
+     * @return
+     */
+    public int getATK()
+    {
+        return this.weapon.getATK();
     }
 }

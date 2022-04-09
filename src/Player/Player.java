@@ -6,6 +6,7 @@ import java.util.Set;
 
 import Loot.Item;
 import Loot.ItemType;
+import Loot.StatSheet;
 
 /**
  * The Player Class
@@ -64,6 +65,26 @@ public class Player {
     }
 
     /**
+     * The ATK stat of the player
+     */
+    private float atk_stat;
+    /**
+     * Returns the ATK stat of the player
+     * @return atk_stat
+     */
+    public float getPlayerATK(){return this.atk_stat;}
+
+    /**
+     * The Armor stat of the player
+     */
+    private float armor_stat;
+    /**
+     * Returns the player armor stat
+     * @return armor_stat
+     */
+    public float getPlayerArmor(){return this.armor_stat;}
+
+    /**
      * Constructor of the player.
      * @param name
      * @param hp
@@ -72,22 +93,59 @@ public class Player {
         this.name=name;
         this.hp=hp;
         this.inventory=new HashMap<>();
-        this.addToInventory(new Item(1,"Coin of Passage",ItemType.EQUIPMENT,"A golden token forged in the pits of Uda Keiviv, symbol of the soldiers amongst the Golden Armies of Light."));
+        this.addToInventory(new Item(1,"Coin of Passage",ItemType.EQUIPMENT,"A golden token forged in the pits of Uda Keiviv, symbol of the soldiers amongst the Golden Armies of Light.",new StatSheet(null, 100)));
     }
 
+    /**
+     * The method called by the fight event tht calculates the player's stats
+     */
     public void calculateStats()
     {
         calculateATK();
         calculateArmor();
     }
 
+    /**
+     * Calculates the armor
+     */
     public void calculateArmor()
     {
-
+        System.out.println("Armor : ");
+        int localArmor=0;
+        //we sum up all the ATK stats in the various weapons items of the player (system to be reworked when weapon handling is added)
+        for (Map.Entry<String, Item> entry : this.inventory.entrySet())
+        {
+            if(entry.getValue().getType()==ItemType.WEAPON)
+            {
+                localArmor+=entry.getValue().getArmor();
+            }
+        }
+        this.armor_stat=localArmor;
     }
 
+    /**
+     * Calculates the player ATK
+     */
     public void calculateATK()
     {
+        System.out.println("ATK : ");
+        int localAtk=0;
+         //we sum up all the ATK stats in the various weapons items of the player (system to be reworked when weapon handling is added)
+        for (Map.Entry<String, Item> entry : this.inventory.entrySet())
+        {
+            if(entry.getValue().getType()==ItemType.WEAPON)
+            {
+                localAtk+=entry.getValue().getATK();
+            }
+        }
+        this.atk_stat=localAtk;
+    }
 
+    /**
+     * The dialogue played when the player is killed
+     * @return
+     */
+    public String getDeathDialogue() {
+        return "You have perished.";
     }
 }

@@ -1,5 +1,7 @@
 package Loot;
 
+import java.util.Optional;
+
 import Player.Player;
 
 /**
@@ -19,6 +21,22 @@ public class Item {
     //description of the item
     private String description;
     public String getDescription(){return this.description;}
+    //Stats of the item are contained in a statSheet object:
+    private StatSheet statSheet;
+    /**
+     * Returns the Armor value (may be null)
+     * @return Armor (Optional<Float>)
+     */
+    public Integer getArmor(){
+        return statSheet.getArmor();
+    }
+    /**
+     * Returns the ATK value (may be null)
+     * @return ATK (Optional<Float>)
+     */
+    public Integer getATK(){
+        return statSheet.getATK();
+    }
 
     /**
      * Constructor of the item
@@ -26,12 +44,14 @@ public class Item {
      * @param name name of the item
      * @param type type of the item
      * @param description description of said item
+     * @param statSheet StatSheet object associated with the item
      */
-    public Item(final int id, final String name, final ItemType type, final String description){
+    public Item(final int id, final String name, final ItemType type, final String description, final StatSheet statSheet){
         this.id=id;
         this.name=name;
         this.type=type;
         this.description=description;
+        this.statSheet=statSheet;
     }
 
     /**
