@@ -94,6 +94,7 @@ public class Player {
         this.hp=hp;
         this.inventory=new HashMap<>();
         this.addToInventory(new Item(1,"Coin of Passage",ItemType.EQUIPMENT,"A golden token forged in the pits of Uda Keiviv, symbol of the soldiers amongst the Golden Armies of Light.",new StatSheet(null, 100)));
+        this.addToInventory(new Item(2,"Steel Sword",ItemType.WEAPON, "A simple steel sword",new StatSheet(2, null)));
     }
 
     /**
@@ -115,12 +116,14 @@ public class Player {
         //we sum up all the ATK stats in the various weapons items of the player (system to be reworked when weapon handling is added)
         for (Map.Entry<String, Item> entry : this.inventory.entrySet())
         {
-            if(entry.getValue().getType()==ItemType.WEAPON)
+            if(entry.getValue().getType()==ItemType.EQUIPMENT)
             {
                 localArmor+=entry.getValue().getArmor();
             }
         }
         this.armor_stat=localArmor;
+        System.out.println(this.armor_stat+"\n");
+
     }
 
     /**
@@ -139,6 +142,7 @@ public class Player {
             }
         }
         this.atk_stat=localAtk;
+        System.out.println(this.atk_stat+"\n");
     }
 
     /**
