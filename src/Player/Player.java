@@ -102,6 +102,8 @@ public class Player {
      */
     public void calculateStats()
     {
+        System.out.print("HP : ");
+        System.out.println(this.hp+"\n");
         calculateATK();
         calculateArmor();
     }
@@ -111,7 +113,7 @@ public class Player {
      */
     public void calculateArmor()
     {
-        System.out.println("Armor : ");
+        System.out.print("Armor : ");
         int localArmor=0;
         //we sum up all the ATK stats in the various weapons items of the player (system to be reworked when weapon handling is added)
         for (Map.Entry<String, Item> entry : this.inventory.entrySet())
@@ -131,7 +133,7 @@ public class Player {
      */
     public void calculateATK()
     {
-        System.out.println("ATK : ");
+        System.out.print("ATK : ");
         int localAtk=0;
          //we sum up all the ATK stats in the various weapons items of the player (system to be reworked when weapon handling is added)
         for (Map.Entry<String, Item> entry : this.inventory.entrySet())

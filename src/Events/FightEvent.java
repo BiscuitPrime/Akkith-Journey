@@ -46,6 +46,8 @@ public class FightEvent extends Event {
     {
         System.out.println(this.getDescription());
         Thread.sleep(500);
+        System.out.println(monster.getName());
+        Thread.sleep(500);
         System.out.println(monster.getDescription());
         Thread.sleep(500);
         System.out.println(monster.getStartingDialogue());
@@ -116,10 +118,11 @@ public class FightEvent extends Event {
     private void fightSetUp(Player player, Monster monster) throws InterruptedException
     {
         //we start by calculating the damage and resistance of player :
-        System.out.println("Your current stats :");
+        System.out.println("Your current stats :"+"\n");
         Thread.sleep(500);
         player.calculateStats();
         //now that the stats have been calculated, we launch the fight sequence :
+        System.out.println("The air cools around you. The fight begins.\n");
         fightSequence(player, monster);
     }
 
@@ -131,8 +134,8 @@ public class FightEvent extends Event {
      */
     private void fightSequence(Player player, Monster monster) throws InterruptedException
     {
-        System.out.println("The air cools around you. The fight begins.\n");
-        Thread.sleep(500);
+        
+        Thread.sleep(1000);
         playerAttack(player,monster);
         if(monster.getHp()<=0) //we check here if the player has killed in one shot the monster
         {
@@ -180,7 +183,6 @@ public class FightEvent extends Event {
         {
             System.out.println(monster.getDeathDialogue());
             Thread.sleep(500);
-            this.getReward().obtainLoot(player,this.getReward());
             return;
         }
         //we then check the player :
