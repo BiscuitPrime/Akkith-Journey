@@ -10,7 +10,8 @@ import Player.Player;
  * @author Henri 'Biscuit Prime' Nomico
  */
 public class LoreEvent extends Event {
-    
+    //a variable used to indicate wether it's the end event
+    public boolean is_end_event = false;
     /**
      * Constructor of the Lore Event.
      * @param id : id of event
@@ -42,6 +43,7 @@ public class LoreEvent extends Event {
      * @throws InterruptedException
      */
     public void endEvent(final Player player, final Scanner scanner) throws InterruptedException{
+        if(is_end_event){return;}
         System.out.println("You leave "+this.getName());
         Thread.sleep(500);
         System.out.println("Behind you, the air shivers as the shadows claim back what you left.");

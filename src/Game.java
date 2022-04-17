@@ -19,20 +19,20 @@ import Player.Player;
 public class Game{
     
     /**
-     * The list of events used for a run of the game.
+     * The chain of events used for a run of the game.
      */
-    private static Map<String,Event> listEvents;
+    private static Map<String,Event> chainEvents;
     /**
-     * Returns list of events for a given run. 
+     * Returns chain of events for a given run. 
      * @return listEvents
      */
-    public static Map<String,Event> getEventList(){return listEvents;}
+    public static Map<String,Event> getEventChain(){return chainEvents;}
     /**
      * Adds an event to the list of events for a given run.
      * TO BE REMOVED IN FINAL PRODUCT
      * @param event
      */
-    public static void addToEventList(final Event event){listEvents.put(event.getName(),event);}
+    public static void addToEventChain(final Event event){chainEvents.put(event.getName(),event);}
 
     /**
      * the scanner that will be used to read inputs.
@@ -52,10 +52,10 @@ public class Game{
         /**
          * Test phases
          */
-        EventListCreator listEventCreator = new EventListCreator();
-        System.out.println("Complete event list : "+listEventCreator.getEventlist());
-        listEventCreator.procedureCreateEventChain();
-        System.out.println("Event chain : "+listEventCreator.getEventChain());
+        // EventListCreator listEventCreator = new EventListCreator();
+        // System.out.println("Complete event list : "+listEventCreator.getEventlist());
+        // listEventCreator.procedureCreateEventChain();
+        // System.out.println("Event chain : "+listEventCreator.getEventChain());
         /*
         Item monsterItem = new Item(1, "Weapon", ItemType.WEAPON, "description", new StatSheet(1, 0));
         Monster monsterOne = new Monster(1,"Aokithi","The monster", monsterItem,10, "startDialogue", "endDialogue", "death");
@@ -68,24 +68,23 @@ public class Game{
         /**
          * the actual game
          */
-        /*
-        createEventChain(2);
+        
+        createEventChain();
         launchChain(player, scanner); //the launch of the game is done when all events have been selected
-        */
     }
 
     /**
      * Creates the chain of events, stored in listEvents.
-     * @param n number of events in the given chain.
      */
-    private static void createEventChain(final int n)
+    private static void createEventChain()
     {
-        listEvents = new HashMap<>(); //we create the event chain
+        chainEvents = new HashMap<>(); //we create the event chain
         //in the future, the events will have to be created based on a JSON file
         //for now, a special object creates the list of all possible events
         EventListCreator listEventCreator = new EventListCreator();
         //we now create the event chain used for the run :
-        //listEvents = listEventCreator.procedureCreateEventChain();
+        listEventCreator.procedureCreateEventChain();
+        chainEvents=listEventCreator.getEventChain();
     }
 
     /**
@@ -98,10 +97,10 @@ public class Game{
     {
         System.out.println("You awake in a strange place.");
         Thread.sleep(500);
-        Iterator<String> chainIterator = getEventList().keySet().iterator();
+        Iterator<String> chainIterator = getEventChain().keySet().iterator();
         while(chainIterator.hasNext()) 
         {
-            getEventList().get(chainIterator.next()).launchEvent(player, scanner);
+            getEventChain().get(chainIterator.next()).launchEvent(player, scanner);
             waitForPlayerEnterInput(player);
         }
         scanner.close();//we close the scanner at the end of the game.

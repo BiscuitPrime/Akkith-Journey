@@ -7,6 +7,7 @@ import java.util.Map;
 import Loot.Item;
 import Loot.ItemType;
 import Loot.StatSheet;
+import Monsters.Monster;
 
 /**
  * This class is only used to possess all the possible events that the game will use.
@@ -39,6 +40,7 @@ public class EventListCreator {
      * @return eventChain
      */
     public Map<String,Event> getEventChain(){return eventsChain;}
+    public void addToEventChain(final Event event){eventsChain.put(event.getName(),event);}
 
     private int chance_pourcentage;
     private int id_flag;
@@ -59,15 +61,24 @@ public class EventListCreator {
      * The method that creates all the various elements of the eventList.
      */
     public void createEventList(){
-        LoreEvent startingEvent = new LoreEvent(1, "Ruins of Oba Kin", null, "You look at the desolation that was once a glorious city. The pale fumes are the only remains amongst the charred corpses and the blackened buildings that have all but crumbled to dust. Once a glorious city, you remember. You also remember its fall, as you defended the inhabitants from the Armies of Entropy. You must have been struck, as you find your armor wrent and sword broken. Finding no souls, you decide to go for the closest city that might still stand : Ak Variv.");
-        addToEventList(startingEvent);
+        //we create the various objects of the game :
+        Item entropicArmorSword = new Item(0, "Sword", ItemType.WEAPON, "Entropic armor weapon", new StatSheet(7, 0));
+        Monster entropicArmor = new Monster(0, "Entropic Armor", "The decrepit remains of a knight long gone, animated by the wills of the Akrakon Pantheon. The half-wrent armor cracks and bends as it seeks anything alive.", entropicArmorSword, 20, "*menacing crackling noises*", "*breaking noises*", "*shattering noises*");
+        Item wrentHelmet1 = new Item(1, "Wrent Helmet", ItemType.EQUIPMENT, "A broken helmet. Under the dust you can still make out the flowery crest of Terra.", new StatSheet(0, 30));
+        Item wrentHelmet2 = new Item(1, "Wrent Helmet", ItemType.EQUIPMENT, "A broken helmet. Under the dust you can still make out the flowery crest of Terra.", new StatSheet(0, 30));
+        Item boneTentacle = new Item(2, "Bone Tentacle", ItemType.WEAPON, "A cackling bone tentacle stripped from the octopus' fading body. Sturdy as metal, you can use it as a flail.", new StatSheet(10, 0));
+        Monster chaosOctopus = new Monster(1, "Chaos Octopus", "A giant octopus of bones that will crush anyone who would dare enter its territory. Born in the deepest reaches of the Next Plane, its bony hide is covered with obsidian relics of ages past.", boneTentacle, 25, "*wierd guttering sounds*", "*weird sounds*", "*weird fainting sounds*");
+        //we create and add the events :
+        addToEventList(new FightEvent(1, "Battle at Om Kili", wrentHelmet1, "In the ruined streets of Om Kili, you find an Entropic Armor. The bodyless purple metal machine walks with you with burning hatred.", entropicArmor));
+        addToEventList(new LoreEvent(1, "Mist over Kareth Oba", null, "You watch the thick mist falling over the small village of Kareth Oba. The wretched wooden remains of old burned-down houses point to the sky like accusing fingers."));
+        addToEventList(new LoreEvent(2, "Somber Docks of Virith", null, "You discover the docks of Virith, a small port on the Night Sea. The old wooden boats are but consumed remnants of ashes, skeletons littering the rocky docks."));
+        addToEventList(new FightEvent(2, "Encounter at Virith's Docks", boneTentacle, "As you walk along the Virith docks, you are attacked by a dozen grasping tentacles of hard bones, rupturing the land as they flail around you. A monstrous white figure emerges from the sea, fires unquenched for hatred burning deep in the holes of its skull. A Chaos Octopus has emerged from its wake.", chaosOctopus));
         ChestEvent chestOne = new ChestEvent(2, "Sarcophagus of Heilith", new Item(1, "Sword of Bil Akath", ItemType.WEAPON, "The mighty sword of the last Archon under Akkalioth's orders. Under its blade, numerous angels have fallen, as the Fangs of Entropy closed upon the lucent city of Dek Ithien. It was lost during the siege of Ol Imoliv, when the archon was slain by Hildrimen, Rage Incarnate.", new StatSheet(200, 0)), "The serene golden and purple hide fades around the edges of the box. An arm's length it measures, yet some strange force emanates from this boxy monument of time past.");
         addToEventList(chestOne);  
     }
 
     /**
      * The method that handles the creation of the event chain procedurally.
-     * @return
      */
     public void procedureCreateEventChain()
     {
@@ -75,6 +86,10 @@ public class EventListCreator {
         LoreEvent startingEvent = new LoreEvent(1, "Ruins of Oba Kin", null, "You look at the desolation that was once a glorious city. The pale fumes are the only remains amongst the charred corpses and the blackened buildings that have all but crumbled to dust. Once a glorious city, you remember. You also remember its fall, as you defended the inhabitants from the Armies of Entropy. You must have been struck, as you find your armor wrent and sword broken. Finding no souls, you decide to go for the closest city that might still stand : Ak Variv.");
         last_added_event=startingEvent;
         procedure(startingEvent);
+        //after we created the chain, we add the final event (game ending)
+        LoreEvent endingEvent = new LoreEvent(904,"Agolin Respite",null, "Deep in the Agolin Mountains, you finally stumble upon an encampment of the Armies of Light. Amazed by your stories, they say that they will protect you from now on. \nYou survived. Good job.");
+        endingEvent.is_end_event=true;
+        addToEventChain(endingEvent);
     }
 
     public void procedure(Event event){
