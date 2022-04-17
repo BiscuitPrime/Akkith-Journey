@@ -3,11 +3,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
-import Events.ChestEvent;
 import Events.Event;
 import Events.EventListCreator;
 import Events.FightEvent;
-import Events.LoreEvent;
 import Loot.Item;
 import Loot.ItemType;
 import Loot.StatSheet;
@@ -18,7 +16,7 @@ import Player.Player;
  * The class that handles the game itself.
  * @author Henri 'Biscuit Prime' Nomico
  */
-public class Game {
+public class Game{
     
     /**
      * The list of events used for a run of the game.
@@ -54,19 +52,26 @@ public class Game {
         /**
          * Test phases
          */
+        EventListCreator listEventCreator = new EventListCreator();
+        System.out.println("Complete event list : "+listEventCreator.getEventlist());
+        listEventCreator.procedureCreateEventChain();
+        System.out.println("Event chain : "+listEventCreator.getEventChain());
+        /*
         Item monsterItem = new Item(1, "Weapon", ItemType.WEAPON, "description", new StatSheet(1, 0));
         Monster monsterOne = new Monster(1,"Aokithi","The monster", monsterItem,10, "startDialogue", "endDialogue", "death");
         FightEvent fightOne = new FightEvent(2, "Fight at world's end", monsterItem, "The monster stand before you", monsterOne);
         fightOne.launchEvent(player, scanner);
         System.out.println(player.getInventory());
+        */
+
 
         /**
          * the actual game
          */
-        
+        /*
         createEventChain(2);
         launchChain(player, scanner); //the launch of the game is done when all events have been selected
-        
+        */
     }
 
     /**
@@ -77,9 +82,10 @@ public class Game {
     {
         listEvents = new HashMap<>(); //we create the event chain
         //in the future, the events will have to be created based on a JSON file
-        //for now, a special object creates the list
+        //for now, a special object creates the list of all possible events
         EventListCreator listEventCreator = new EventListCreator();
-        listEvents= listEventCreator.createEventList();
+        //we now create the event chain used for the run :
+        //listEvents = listEventCreator.procedureCreateEventChain();
     }
 
     /**
